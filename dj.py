@@ -68,14 +68,25 @@ def weight(u,v,G):
 
 def main():
     graph = Graph()
-    vertexList01 = [Vertex('s'), Vertex('t'), Vertex('y'), Vertex('x'), Vertex('z')]
-    adjList0 = {'s': [(Vertex('t'), 10), (Vertex('y'),5)], 't': [(Vertex('x'),1), (Vertex('y'),2)], 'y': [(Vertex('t'),3), (Vertex('x'),9), (Vertex('z'),2)], 'x': [(Vertex('z'),4)], 'z': [(Vertex('x'),6), (Vertex('s'),7)]}
-    adjList1 = {'s': [(Vertex('t'),3), (Vertex('y'),5)], 't': [(Vertex('x'),6), (Vertex('y'),2)], 'y': [(Vertex('t'),1), (Vertex('x'),4), (Vertex('z'),6)], 'x': [(Vertex('z'),2)], 'z': [(Vertex('x'),7), (Vertex('s'),3)]}
+    graph.addEdge('s', 't', 10)
+    graph.addEdge('s', 'y', 5)
+    graph.addEdge('t','x', 1)
+    graph.addEdge('t','y', 2)
+    graph.addEdge('y', 't', 3)
+    graph.addEdge('y', 'x', 9)
+    graph.addEdge('y', 'z', 2)
+    graph.addEdge('x', 'z', 4)
+    graph.addEdge('z', 'x', 6)
+    graph.addEdge('z', 's', 7)
 
-    vertexList2 = [Vertex('s'), Vertex('t'), Vertex('y'), Vertex('x'), Vertex('z'), Vertex('b')]
-    adjList2 = {'s': [(Vertex('t'), 2), (Vertex('y'),4)], 't': [(Vertex('x'),7), (Vertex('y'),1)], 'y': [(Vertex('z'),3)], 'x': [(Vertex('b'),1)], 'z': [(Vertex('x'),2), (Vertex('b'),5)], 'b': []}
-    graph.setAdjacent(adjList0)
-    graph.setVertices(vertexList01)
+    # vertexList01 = [Vertex('s'), Vertex('t'), Vertex('y'), Vertex('x'), Vertex('z')]
+    # adjList0 = {'s': [(Vertex('t'), 10), (Vertex('y'),5)], 't': [(Vertex('x'),1), (Vertex('y'),2)], 'y': [(Vertex('t'),3), (Vertex('x'),9), (Vertex('z'),2)], 'x': [(Vertex('z'),4)], 'z': [(Vertex('x'),6), (Vertex('s'),7)]}
+    # adjList1 = {'s': [(Vertex('t'),3), (Vertex('y'),5)], 't': [(Vertex('x'),6), (Vertex('y'),2)], 'y': [(Vertex('t'),1), (Vertex('x'),4), (Vertex('z'),6)], 'x': [(Vertex('z'),2)], 'z': [(Vertex('x'),7), (Vertex('s'),3)]}
+
+    # vertexList2 = [Vertex('s'), Vertex('t'), Vertex('y'), Vertex('x'), Vertex('z'), Vertex('b')]
+    # adjList2 = {'s': [(Vertex('t'), 2), (Vertex('y'),4)], 't': [(Vertex('x'),7), (Vertex('y'),1)], 'y': [(Vertex('z'),3)], 'x': [(Vertex('b'),1)], 'z': [(Vertex('x'),2), (Vertex('b'),5)], 'b': []}
+    # graph.setAdjacent(adjList0)
+    # graph.setVertices(vertexList01)
     dj(graph, weight, 's')
 
 if __name__ == "__main__":
