@@ -1,5 +1,6 @@
 import heapq
-import random
+from vertex import Vertex
+from graph import Graph
 
 def dj(G, w, s):
     init_single_source(G,s)
@@ -65,44 +66,16 @@ def weight(u,v,G):
     
     return 0
 
-class Graph:
-    def __init__(self):
-        self.V = []
-        self.adj = {}
-    
-    def setAdjacent(self, adj):
-        self.adj.clear()
-        self.adj = adj
-    
-    def setVertices(self, v):
-        self.V.clear()
-        self.V = v
-
-    def addEdge(self, u, v, w):
-        if u in self.adj:
-            self.adj[u].append((Vertex(v), w))
-        else:
-            self.V.append(Vertex(u))
-            self.adj[u] = [(Vertex(v), w)]      
-        
-class Vertex:
-    def __init__(self, val):
-        self.predecessor = None
-        self.distance = None
-        self.value = val
-
-    def __lt__(self, other):
-        # Overload the less than operator. This function is called when there needs to be a tie break.
-        return random.choice([self,other])
-
 def main():
     graph = Graph()
-    # adjList = {'s': [Vertex('t', 10), Vertex('y', 5)], 't': [Vertex('x', 1), Vertex('y', 2)], 'y': [Vertex('t', 3), Vertex('x', 9), Vertex('z', 2)], 'x': [Vertex('z', 4)], 'z': [Vertex('x', 6), Vertex('s', 7)]}
-    # adjList = {'s': [Vertex('t', 3), Vertex('y', 5)], 't': [Vertex('x', 6), Vertex('y', 2)], 'y': [Vertex('t', 1), Vertex('x', 4), Vertex('z', 6)], 'x': [Vertex('z', 2)], 'z': [Vertex('x', 7), Vertex('s', 3)]}
-    vertexList = [Vertex('s'), Vertex('t'), Vertex('y'), Vertex('x'), Vertex('z'), Vertex('b')]
-    adjList = {'s': [(Vertex('t'), 2), (Vertex('y'),4)], 't': [(Vertex('x'),7), (Vertex('y'),1)], 'y': [(Vertex('z'),3)], 'x': [(Vertex('b'),1)], 'z': [(Vertex('x'),2), (Vertex('b'),5)], 'b': []}
-    graph.setAdjacent(adjList)
-    graph.setVertices(vertexList)
+    vertexList01 = [Vertex('s'), Vertex('t'), Vertex('y'), Vertex('x'), Vertex('z')]
+    adjList0 = {'s': [(Vertex('t'), 10), (Vertex('y'),5)], 't': [(Vertex('x'),1), (Vertex('y'),2)], 'y': [(Vertex('t'),3), (Vertex('x'),9), (Vertex('z'),2)], 'x': [(Vertex('z'),4)], 'z': [(Vertex('x'),6), (Vertex('s'),7)]}
+    adjList1 = {'s': [(Vertex('t'),3), (Vertex('y'),5)], 't': [(Vertex('x'),6), (Vertex('y'),2)], 'y': [(Vertex('t'),1), (Vertex('x'),4), (Vertex('z'),6)], 'x': [(Vertex('z'),2)], 'z': [(Vertex('x'),7), (Vertex('s'),3)]}
+
+    vertexList2 = [Vertex('s'), Vertex('t'), Vertex('y'), Vertex('x'), Vertex('z'), Vertex('b')]
+    adjList2 = {'s': [(Vertex('t'), 2), (Vertex('y'),4)], 't': [(Vertex('x'),7), (Vertex('y'),1)], 'y': [(Vertex('z'),3)], 'x': [(Vertex('b'),1)], 'z': [(Vertex('x'),2), (Vertex('b'),5)], 'b': []}
+    graph.setAdjacent(adjList0)
+    graph.setVertices(vertexList01)
     dj(graph, weight, 's')
 
 if __name__ == "__main__":
