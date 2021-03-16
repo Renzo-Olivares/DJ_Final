@@ -44,9 +44,8 @@ def init_single_source(G, s):
             vertex.distance = float('inf')
         vertex.predecessor = None
         
-    for vertex in G.adj.values():
-        for node in vertex:
-            currentNode = node[0]
+        for edge in G.adj[vertex.value]:
+            currentNode = edge[0]
             if currentNode.value == s:
                 currentNode.distance = 0
             else:
