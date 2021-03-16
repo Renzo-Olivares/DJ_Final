@@ -24,11 +24,11 @@ def dj(G, w, s):
             originalDistance = currentVertex.distance
             relax(u, currentVertex, w, G)
             if currentVertex.distance != originalDistance:
+                updateGraph(G,S,Q)
                 for index, vTuple in enumerate(Q):
                     if vTuple[1].value == currentVertex.value:
                         Q[index] = (currentVertex.distance, currentVertex)
                         heapq.heapify(Q)
-
 
     for node in S:
         print('node:' + node.value)
@@ -36,7 +36,21 @@ def dj(G, w, s):
         if node.predecessor is not None:
             print('node parent:' + node.predecessor.value)
         print('\n')
-                
+
+def updateGraph(G, S, Q):
+    for vertex in S:
+        for key,value in G.adj.items():
+            for index, edge in enumerate(G.adj[key]):
+                if vertex.value == G.adj[key][index][0].value:
+                    G.adj[key][index] = (vertex, G.adj[key][index][1])
+
+    for vertex in Q:
+        for key,value in G.adj.items():
+            for index, edge in enumerate(G.adj[key]):
+                if vertex[1].value == G.adj[key][index][0].value:
+                    G.adj[key][index] = (vertex[1], G.adj[key][index][1])
+
+
 def init_single_source(G, s):
     for vertex in G.V:
         if vertex.value == s:
@@ -68,24 +82,24 @@ def weight(u,v,G):
 
 def main():
     graph = Graph()
-    # graph.addEdge('s', 't', 10)
-    # graph.addEdge('s', 'y', 5)
-    # graph.addEdge('t','x', 1)
-    # graph.addEdge('t','y', 2)
-    # graph.addEdge('y', 't', 3)
-    # graph.addEdge('y', 'x', 9)
-    # graph.addEdge('y', 'z', 2)
-    # graph.addEdge('x', 'z', 4)
-    # graph.addEdge('z', 'x', 6)
-    # graph.addEdge('z', 's', 7)
+    graph.addEdge('s', 't', 10)
+    graph.addEdge('s', 'y', 5)
+    graph.addEdge('t','x', 1)
+    graph.addEdge('t','y', 2)
+    graph.addEdge('y', 't', 3)
+    graph.addEdge('y', 'x', 9)
+    graph.addEdge('y', 'z', 2)
+    graph.addEdge('x', 'z', 4)
+    graph.addEdge('z', 'x', 6)
+    graph.addEdge('z', 's', 7)
 
-    graph.addEdge('a', 'b', 7)
-    graph.addEdge('a', 'c', 3)
-    graph.addEdge('c', 'd', 1)
-    graph.addEdge('c', 'b', 2)
-    graph.addEdge('d', 'e', 4)
-    graph.addEdge('d', 'b', 2)
-    graph.addEdge('b', 'e', 5)
+    # graph.addEdge('a', 'b', 7)
+    # graph.addEdge('a', 'c', 3)
+    # graph.addEdge('c', 'd', 1)
+    # graph.addEdge('c', 'b', 2)
+    # graph.addEdge('d', 'e', 4)
+    # graph.addEdge('d', 'b', 2)
+    # graph.addEdge('b', 'e', 5)
 
     # vertexList01 = [Vertex('s'), Vertex('t'), Vertex('y'), Vertex('x'), Vertex('z')]
     # adjList0 = {'s': [(Vertex('t'), 10), (Vertex('y'),5)], 't': [(Vertex('x'),1), (Vertex('y'),2)], 'y': [(Vertex('t'),3), (Vertex('x'),9), (Vertex('z'),2)], 'x': [(Vertex('z'),4)], 'z': [(Vertex('x'),6), (Vertex('s'),7)]}
@@ -95,7 +109,7 @@ def main():
     # adjList2 = {'s': [(Vertex('t'), 2), (Vertex('y'),4)], 't': [(Vertex('x'),7), (Vertex('y'),1)], 'y': [(Vertex('z'),3)], 'x': [(Vertex('b'),1)], 'z': [(Vertex('x'),2), (Vertex('b'),5)], 'b': []}
     # graph.setAdjacent(adjList0)
     # graph.setVertices(vertexList01)
-    dj(graph, weight, 'a')
+    dj(graph, weight, 's')
 
 if __name__ == "__main__":
     main()
